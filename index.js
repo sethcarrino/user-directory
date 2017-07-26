@@ -1,6 +1,7 @@
 const express = require('express');
 const mustacheExpress = require('mustache-express');
-const data = require('./data.js')
+const data = require('./data.js');
+const chalk = require('chalk');
 const app = express();
 
 
@@ -22,6 +23,13 @@ app.get('/:user', function(request, response) {
     }
   }
 });
+
+for (let i = 0; i < data.users.length; i++) {
+  if(data.users[i].job === null){
+    delete data.users[i].job;
+    data.users[i].job = "Available for hire"
+  }
+}
 
 
 

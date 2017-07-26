@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sethcarrino/user-directory#readme",
   "dependencies": {
+    "chalk": "^2.0.1",
     "express": "^4.15.3",
     "mustache-express": "^1.2.5"
   }
