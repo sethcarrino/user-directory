@@ -14,9 +14,14 @@ app.get('/', function(req, res){
   res.render('home', data)
 });
 
-app.get('/:user', function(req, res){
-  res.render('user', req.params.username)
-})
+app.get('/:user', function(request, response) {
+  let userName = request.params.user;
+  for (let i = 0; i < data.users.length; i++) {
+    if (data.users[i].username === userName) {
+      response.render('user', data.users[i]);
+    }
+  }
+});
 
 
 

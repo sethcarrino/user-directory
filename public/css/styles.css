@@ -5,6 +5,9 @@ secondary color: #da5d72
 
 */
 
+
+/*------ Mian Styles for index page -----*/
+
 *{
   font-family: 'Helvetica', arial;
 }
@@ -44,4 +47,43 @@ p{
 }
 #user p{
   margin-top: -.5em;
+}
+
+
+/*------ User page styles -----*/
+
+#userName{
+  font-weight: 500;
+  font-size: 50px;
+  margin-left: 1em;
+  text-align: left;
+  margin-top: 0;
+}
+
+#userContainer{
+  margin: 0 auto;
+}
+
+#userWrapper{
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 5em;
+}
+
+#userImage img{
+  border: 1px solid lightgrey;
+  border-radius: 100%;
+  float: left;
+}
+
+#userInfo{
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column wrap;
+}
+
+#userInfo p{
+  margin-top: -.8em;
+  text-align: left;
+  margin-left: 2em;
 }

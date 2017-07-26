@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>User</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-  </head>
-  <body>
-    <div id=userWrapper>
-      <h1>{{data.users.name}}</h1>
+
+<head>
+  <meta charset="utf-8">
+  <title>User</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body id="userContainer">
+  <div id=userWrapper>
+
+    <div id="userImage">
+      <img src= {{avatar}}>
     </div>
-  </body>
+    <div id="userInfo">
+      <h2 id="userName">{{name}}</h2>
+      <p id="userAbout">{{address.city}}, {{address.country}} | {{job}} | {{company}}</p>
+      <p id="userContact">{{email}} | {{phone}}</p>
+    </div>
+    <div id="userSkills">
+      <table>
+        <tr>
+          <td class="education">Education</td>
+          <td class="educationInfo">{{university}}</td>
+        <tr>
+        <tr>
+          <td class="skills">Skills</td>
+          <td class="skillsInfo">
+            <ul>
+              {{#skills}}
+                <li>{{.}}</li>
+              {{/skills}}
+            </ul
+          </td>
+        <tr>
+      </table>
+    </div>
+</body>
+
 </html>
