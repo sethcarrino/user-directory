@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Unemployed Robots</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <div id="mainContainer">
+    {{#unemployedRobots}}
+    <div class="robotContainer">
+      <ul>
+        <a href="./{{username}}"<li><img src="{{avatar}}"></li></a>
+        <li>{{name}}</li>
+        <li>{{skills}}</li>
+      </ul>
+    </div>
+    {{/unemployedRobots}}
+  </div>
+  </body>
+</html>

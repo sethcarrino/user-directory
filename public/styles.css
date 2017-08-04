@@ -1,0 +1,44 @@
+/*
+
+main color: #3178d8
+secondary color: #da5d72
+
+*/
+
+
+/*------ Main Styles for index page -----*/
+
+body {
+
+}
+
+a{
+  text-decoration: none;
+}
+
+#mainContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.robotContainer {
+  border-style: solid;
+  border-color: black;
+  border-width: thin;
+  display: flex;
+  justify-content: center;
+  width: 24%;
+  margin: 1em;
+}
+
+ul {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+li {
+  list-style: none;
+}

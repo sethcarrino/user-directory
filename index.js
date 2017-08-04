@@ -1,38 +1,83 @@
 const express = require('express');
-const mustacheExpress = require('mustache-express');
-const data = require('./data.js');
-const chalk = require('chalk');
+const mustache = require('mustache-express');
+const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+const session = require('express-session');
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+app.use(expressValidator());
 
-app.engine('mustache', mustacheExpress());
-app.set('views', './views');
-app.set('view engine', 'mustache');
+app.use(session({
+  secret: 'V4P3N4710N',
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use(express.static('public'));
+app.engine('mustache', mustache());
+app.set('view engine', 'mustache');
+app.set('views', './views');
+
+var url = 'mongodb://localhost:27017/robotsdb';
+var db;
+var allRobots;
+
+MongoClient.connect(url, function(err, db) {
+  assert.equal(null, err);
+  console.log("Connected successfully to server");
+  db = db;
+  allRobots = db.collection('users');
+  app.listen(3000, function(){
+    console.log('Successfully started express application!');
+  })
+
+});
 
 app.get('/', function(req, res){
-  res.render('home', data)
-});
-
-app.get('/:user', function(request, response) {
-  let userName = request.params.user;
-  for (let i = 0; i < data.users.length; i++) {
-    if (data.users[i].username === userName) {
-      response.render('user', data.users[i]);
-    }
-  }
-});
-
-for (let i = 0; i < data.users.length; i++) {
-  if(data.users[i].job === null){
-    delete data.users[i].job;
-    data.users[i].job = "Available for hire"
-  }
-}
-
-
-
-app.listen(3001, function(){
-  console.log('Successfully started the application');
+  allRobots.find({}).toArray(function(err, robots) {
+    assert.equal(err, null);
+    console.log("Found the following records");
+    console.log(robots)
+    res.render('home', {
+      robots: robots
+    });
+  });
 })
+app.get('/specificRobot/:username', function(req, res){
+  let username = req.params.username;
+  allRobots.find({"username": username}).toArray(function(err, robot) {
+    assert.equal(err, null);
+    console.log("Found the following records");
+    console.log(robot)
+    res.render('robot', {
+      robot: robot
+    });
+  });
+});
+app.get('/unemployed', function(req, res){
+  allRobots.find({"job" : null}).toArray(function(err, unemployedRobots){
+    assert.equal(err, null);
+    console.log("Found the following records");
+    console.log(unemployedRobots);
+    res.render('unemployed', {
+      unemployedRobots: unemployedRobots
+    });
+  });
+});
+app.get('/employed', function(req, res){
+  allRobots.find({"job" : {$ne: null}}).toArray(function(err, employedRobots){
+    assert.equal(err, null);
+    console.log("Found the following records");
+    console.log(employedRobots);
+    res.render('employed', {
+      employedRobots: employedRobots
+    });
+  });
+});
