@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Specific Robot</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <div id="usersContainer">
+    {{#robot}}
+    <h1>{{name}}</h1>
+    <div><img src="{{avatar}}"></div>
+    <div>
+      <ul>
+        <li>Education: {{university}}</li>
+        <li>Skills: {{skills}}</li>
+      </ul>
+    </div>
+    {{/robot}}
+  </div>
+  </body>
+</html>
